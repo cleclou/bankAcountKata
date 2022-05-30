@@ -12,18 +12,19 @@ import com.bank.account.kata.entity.Transactions;
  */
 public class DepositService {
 
-	public Transactions getAmountAfterDepositMoney() {
-
+   public Transactions getAmountAfterDepositMoney(final BigDecimal amount) {
+		
 		Transactions transaction = new Transactions();
-		BigDecimal balance = add(transaction.getAmount());
+		transaction.setAmount(amount);
+		transaction.setBalance(BigDecimal.valueOf(1000));
+		BigDecimal balance = add(transaction.getAmount(), transaction.getBalance()); 
 		transaction.setBalance(balance);
-
+		
 		return transaction;
 	}
-
-	public BigDecimal add(BigDecimal deposit) {
-		BigDecimal amount = BigDecimal.valueOf(2100);
-		return amount.add(deposit);
+	
+	public BigDecimal add(BigDecimal deposit, BigDecimal balance) {
+		return balance.add(deposit);
 	}
 
 }
