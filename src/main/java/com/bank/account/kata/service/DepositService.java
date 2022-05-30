@@ -14,7 +14,14 @@ import com.bank.account.kata.entity.Transactions;
  */
 public class DepositService {
 
-   public Transactions getAmountAfterDepositMoney(final BigDecimal amount) {
+	
+   /**
+ * @param amount
+ * @return transactions
+ * Mathode permettant de calculer le solde après avoir effectuer un dépot sur le code. 
+ * Elle retourne la date, le type de transaction le solde et le montant déposé
+ */
+public Transactions getAmountAfterDepositMoney(final BigDecimal amount) {
 		
 		Transactions transaction = new Transactions();
 		transaction.setAmount(amount);
@@ -27,6 +34,13 @@ public class DepositService {
 		return transaction;
 	}
 	
+	/**
+	 * @param deposit
+	 * @param balance
+	 * @return solde
+	 * 
+	 * Methode permettant d'additionner la somme a déposer et le solde 
+	 */
 	public BigDecimal add(BigDecimal deposit, BigDecimal balance) {
 		return balance.add(deposit);
 	}
