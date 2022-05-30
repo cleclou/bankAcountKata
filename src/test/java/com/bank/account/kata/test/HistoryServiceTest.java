@@ -5,12 +5,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bank.account.kata.entity.Operation;
 import com.bank.account.kata.entity.Transactions;
 
 
@@ -21,9 +23,10 @@ public class HistoryServiceTest {
 	
 	@Before
 	public void setup() {
-		transactions = new Transactions(BigDecimal.valueOf(400), BigDecimal.valueOf(2500));
+		transactions = new Transactions(LocalDate.now(), Operation.WITHDRAWAL,
+				BigDecimal.valueOf(400), BigDecimal.valueOf(2500));
 		list.add(transactions);
-		transactions = new Transactions(BigDecimal.valueOf(50), BigDecimal.valueOf(2550));
+		transactions = new Transactions(LocalDate.now(), Operation.DEPOSIT, BigDecimal.valueOf(50), BigDecimal.valueOf(2550));
 		list.add(transactions);
 	}
 	
@@ -31,7 +34,6 @@ public class HistoryServiceTest {
 	public void return_list_transactions() {
 		int sizeMax = list.size();
 		assertThat(sizeMax, equalTo(2));
-		assertThat(list.get(sizeMax-1).getBalance(), equalTo(BigDecimal.valueOf(2550)));		
+		assertThat(list.get(sizeMax-1).getBalance(), equalTo(BigDecimal.valueOf(2550)));
 	}
-
 }
