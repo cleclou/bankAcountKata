@@ -1,7 +1,9 @@
 package com.bank.account.kata.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import com.bank.account.kata.entity.Operation;
 import com.bank.account.kata.entity.Transactions;
 
 /**
@@ -17,6 +19,8 @@ public class DepositService {
 		Transactions transaction = new Transactions();
 		transaction.setAmount(amount);
 		transaction.setBalance(BigDecimal.valueOf(1000));
+		transaction.setDate(LocalDate.now());
+		transaction.setOperation(Operation.DEPOSIT);
 		BigDecimal balance = add(transaction.getAmount(), transaction.getBalance()); 
 		transaction.setBalance(balance);
 		
