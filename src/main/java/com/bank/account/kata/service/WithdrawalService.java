@@ -1,7 +1,9 @@
 package com.bank.account.kata.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import com.bank.account.kata.entity.Operation;
 import com.bank.account.kata.entity.Transactions;
 
 public class WithdrawalService {
@@ -13,6 +15,8 @@ public class WithdrawalService {
 		transactions.setAmount(amount);
 		BigDecimal balance = substractBigDecimal(amount, transactions.getBalance());
 		transactions.setBalance(balance);
+		transactions.setDate(LocalDate.now());
+		transactions.setOperation(Operation.WITHDRAWAL);
 		return transactions;
 	}
 	

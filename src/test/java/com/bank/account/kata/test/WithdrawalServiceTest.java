@@ -4,27 +4,30 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bank.account.kata.entity.Operation;
 import com.bank.account.kata.entity.Transactions;
 import com.bank.account.kata.service.WithdrawalService;
 
 public class WithdrawalServiceTest {
 		
 	WithdrawalService service = new WithdrawalService();
-	BigDecimal balance;
+	Transactions transaction;
 	
 	@Before
 	public void setup() {
-		balance = BigDecimal.valueOf(3000);
+		transaction = new Transactions();
+		transaction.setBalance(BigDecimal.valueOf(3000));
 	}
 	
 	@Test
 	public void withdraw_money_from_my_account() {
 		
-		BigDecimal amount = service.substractBigDecimal(BigDecimal.valueOf(260), balance);
+		BigDecimal amount = service.substractBigDecimal(BigDecimal.valueOf(260), transaction.getBalance());
 		assertThat(amount, equalTo(BigDecimal.valueOf(2740)));		
 		
 	}
@@ -37,6 +40,8 @@ public class WithdrawalServiceTest {
 		transaction = service.getAmountAfterWithdrawalMoney(BigDecimal.valueOf(20));
 		assertThat(transaction.getAmount(), equalTo(BigDecimal.valueOf(20)));
 		assertThat(transaction.getBalance(), equalTo(BigDecimal.valueOf(3527.88)));
+		assertThat(transaction.getOperation(), equalTo(Operation.WITHDRAWAL));
+		assertThat(transaction.getDate(), equalTo(LocalDate.now()));
 		
 		
 	}
